@@ -21,7 +21,7 @@ class Inventory:
         self.stock = current - 1
 
     async def _confirm_with_warehouse(self) -> None:
-        # Most confirmations are answered from the local cache; roughly half need a
-        # round-trip to the warehouse service, which suspends this coroutine.
-        if random.random() < 0.5:
+        # Most confirmations need a round-trip to the warehouse service, which
+        # suspends this coroutine; the rest are answered from the local cache.
+        if random.random() < 0.7:
             await asyncio.sleep(0)
